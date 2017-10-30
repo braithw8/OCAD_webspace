@@ -5,7 +5,7 @@ var y = 0;
 function setup() {
 createCanvas(windowWidth, windowHeight);
 }
-
+//
 function draw() {
 
 	var smallMouseX = constrain(mouseX, 0, windowWidth);
