@@ -145,6 +145,7 @@ var randomTXThue2;
 var randomTXThue3;
 var randomTXThue4;
 var randomTXThue5;
+var randomTXThue6;
 var randomBUTTONhue; //random button colour for loading page
 
 
@@ -197,9 +198,8 @@ function setup() {
 		randomTXThue3 = random(0,100);
 		randomTXThue4 = random(0,100);
 		randomTXThue5 = random(0,100);
+		randomTXThue6 = random(0,100);	
 		randomBUTTONhue = random(0,100);
-		randomTXThue7 = random(0,100);
-		randomTXThue8 = random(0,100);
 
 		textAlign(CENTER, CENTER);			//text alignment
 		randomBGhue = random(0,100); //random background colour for initial game state
@@ -232,7 +232,9 @@ function draw(){
 		if (difference < 19 || difference > 81) {randomTXThue4 = random(0,100);}
 	difference = Math.abs(randomTXThue4 - randomTXThue5);
 		if (difference < 19 || difference > 81) {randomTXThue5 = random(0,100);}
-	difference = Math.abs(randomTXThue5 - randomBUTTONhue);
+	difference = Math.abs(randomTXThue5 - randomTXThue6);
+		if (difference < 19 || difference > 81) {randomTXThue6 = random(0,100);}
+	difference = Math.abs(randomTXThue6 - randomBUTTONhue);
 		if (difference < 19 || difference > 81) {randomBUTTONhue = random(0,100);}
 
 
@@ -245,20 +247,23 @@ function draw(){
 			text('Frame It Up!',window.innerWidth/2,window.innerHeight/8);
 			textSize(textCALCsize/2);
 			fill(randomTXThue2, sat, light);		
-			text('Use your camera to find the person',window.innerWidth/2,window.innerHeight/10*3);	
+			text('Find the person',window.innerWidth/2,window.innerHeight/10*3);	
 			fill(randomTXThue3, sat, light);		
-			text('Ask them to perform the gestural prompt',window.innerWidth/2,window.innerHeight/10*4);
+			text('Ask them to perform',window.innerWidth/2,window.innerHeight/10*4);
 			fill(randomTXThue4, sat, light);		
-			text('Click to take a picture',window.innerWidth/2,window.innerHeight/10*5);
+			text('Frame It Up!',window.innerWidth/2,window.innerHeight/10*5);		
+			fill(randomTXThue5, sat, light);		
+			text('Click to take a picture',window.innerWidth/2,window.innerHeight/10*6);
+			
 			stroke(25);
 			strokeWeight(strokeCALC);
 			fill(randomBUTTONhue, sat, light);
-  			rect(windowWidth/2-textCALCsize*5/3, windowHeight/12*9-textCALCsize*3/4, textCALCsize*10/3, textCALCsize*6/4, textCALCsize/2, textCALCsize/2, textCALCsize/2, textCALCsize/2); 		//rectangular button to enter game state - proportional to textCALCsize :)
-  			fill(randomTXThue5, sat, light);
+  			rect(windowWidth/2-textCALCsize*5/3, windowHeight/12*10-textCALCsize*3/4, textCALCsize*10/3, textCALCsize*6/4, textCALCsize/2, textCALCsize/2, textCALCsize/2, textCALCsize/2); 		//rectangular button to enter game state - proportional to textCALCsize :)
+  			fill(randomTXThue6, sat, light);
   			textSize(textCALCsize);
-			text('PLAY', windowWidth/2, windowHeight/12*9);
+			text('PLAY', windowWidth/2, windowHeight/12*10);
 	
-  if(mouseX>windowWidth/2-textCALCsize*5/3 && mouseX<windowWidth/2+textCALCsize*5/3 && mouseY>windowHeight/12*9.5-textCALCsize*3/4 && mouseY<windowHeight/12*9.5+textCALCsize*3/4 && mouseIsPressed) 	//if button is clicked - constrained to position of button - proportional to textCALCsize ;)
+  if(mouseX>windowWidth/2-textCALCsize*5/3 && mouseX<windowWidth/2+textCALCsize*5/3 && mouseY>windowHeight/12*10-textCALCsize*3/4 && mouseY<windowHeight/12*10+textCALCsize*3/4 && mouseIsPressed) 	//if button is clicked - constrained to position of button - proportional to textCALCsize ;)
   		{
 		openbutton=1;			//switch from loading state 0 to game state 1
 			r = random([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);		//select a random number
