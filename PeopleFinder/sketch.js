@@ -1,6 +1,6 @@
-var openbutton = 0
-var sat = 75
-var light = 50
+var openbutton = 0 //switch between loading page and game states
+var sat = 75 // global colour saturation
+var light = 50 // global colour lightness
 var peopleArray = [	//people array
 		'Jad',
 		'Roxanne B',
@@ -10,14 +10,14 @@ var peopleArray = [	//people array
 		'Ramona',
 		'Kylie',
 		'Karo',
-		'Dave',
+		//'Dave',		//absent
 		'Sean',
 		'Kate',
 		'Roxanne H',
 		'Max',
 		'Chris',
 		'Emilia',
-		'Margot',
+		//'Margot',		//absent
 		'Nick',
 		'Quinn',
 		'Yiyi',
@@ -27,7 +27,7 @@ var peopleArray = [	//people array
 		'Tommy',
 		'Feng'
 		];
-var randomPerson;
+var randomPerson;	//random person variable
 var focusArray = [	//focus array
 		'slight smile',
 		'big smile',
@@ -75,7 +75,7 @@ var focusArray = [	//focus array
 		'right middle finger',
 		'head shake'
 		];
-
+var randomFocus; // random focus variable
 
 var soundArray = [	//sound array
 'assets/LAUGH0001.mp3',
@@ -135,44 +135,37 @@ var soundArray = [	//sound array
 'assets/LAUGH0056.mp3',
 'assets/LAUGH0051.mp3'];
 
-var randomFocus;
-var fontSIZE;
-var randomBGhue;
-var seconds;
-var date;
-var randomTXThue;
-var randomTXThue1;
+var textCALCsize; // font size variable
+var randomBGhue;	//random background colour
+var date;		// clock
+var seconds;	// seconds of clock
+var randomTXThue;	//random text colours
+var randomTXThue1;	//multiple text colours for multiple lines of text in loading page
 var randomTXThue2;
 var randomTXThue3;
 var randomTXThue4;
 var randomTXThue5;
-var randomTXThue6;
-var randomTXThue7;
-var randomTXThue8;
+var randomBUTTONhue; //random button colour for loading page
 
-var selectedSound
-var r = 0
-var s = 1
-var t = 2
-var u = 3
-function preload() {
+
+var r = 0		//resuesable variable for randomness
+
+function preload() {		//preload sound assets
   
 	soundFormats('mp3', 'ogg');
-	randomSound0 = Math.floor(Math.random()*soundArray.length);
-	randomSound1 = Math.floor(Math.random()*soundArray.length);//random sound
-	randomSound2 = Math.floor(Math.random()*soundArray.length);//random sound
-	randomSound3 = Math.floor(Math.random()*soundArray.length);//random sound
-	randomSound4 = Math.floor(Math.random()*soundArray.length);//random sound
-	randomSound5 = Math.floor(Math.random()*soundArray.length);//random sound
-	randomSound6 = Math.floor(Math.random()*soundArray.length);//random sound
-	randomSound7 = Math.floor(Math.random()*soundArray.length);//random sound
-	randomSound8 = Math.floor(Math.random()*soundArray.length);//random sound
-	randomSound9 = Math.floor(Math.random()*soundArray.length);//random sound
-//random sound
+	randomSound0 = Math.floor(Math.random()*soundArray.length); //call for random sound from sound array
+	randomSound1 = Math.floor(Math.random()*soundArray.length);	
+	randomSound2 = Math.floor(Math.random()*soundArray.length);
+	randomSound3 = Math.floor(Math.random()*soundArray.length);
+	randomSound4 = Math.floor(Math.random()*soundArray.length);
+	randomSound5 = Math.floor(Math.random()*soundArray.length);
+	randomSound6 = Math.floor(Math.random()*soundArray.length);
+	randomSound7 = Math.floor(Math.random()*soundArray.length);
+	randomSound8 = Math.floor(Math.random()*soundArray.length);
+	randomSound9 = Math.floor(Math.random()*soundArray.length);
+	//10 random sounds selected per user, to then be loaded as 'selectedSounds'
 
-  //mySound = loadSound('assets/air-horn-club-sample_1.mp3',');
-  //mySound2 = loadSound('assets/vehicle039.mp3',')
-	selectedSound0 = loadSound(soundArray[randomSound0]);
+	selectedSound0 = loadSound(soundArray[randomSound0]);	//loading of previously randomly selected sounds
 	selectedSound1 = loadSound(soundArray[randomSound1]);
 	selectedSound2 = loadSound(soundArray[randomSound2]);
 	selectedSound3 = loadSound(soundArray[randomSound3]);
@@ -182,7 +175,7 @@ function preload() {
 	selectedSound7 = loadSound(soundArray[randomSound7]);
 	selectedSound8 = loadSound(soundArray[randomSound8]);
 	selectedSound9 = loadSound(soundArray[randomSound9]);
-	selectedSound0.playMode('restart');
+	selectedSound0.playMode('restart');		
 	selectedSound1.playMode('restart');
 	selectedSound2.playMode('restart');
 	selectedSound3.playMode('restart');
@@ -192,124 +185,94 @@ function preload() {
 	selectedSound7.playMode('restart');
 	selectedSound8.playMode('restart');
 	selectedSound9.playMode('restart');
+	//play mode so that repeating a sound, interrupts the previous iteration. The random calls in the code make this necessary that one sound does not awkwardly double up. However, that is still possible if two 'randomSounds' point to the same asset. This odds of this are minimized by the number (51) of available sound assets.
 
-	
-
-
-}
-
+}		// end of preload
 function setup() {
-//from loading page
-	
-background(255);
-//createCanvas(windowWidth, windowHeight);
-randomBGhue = random(0,100);
-randomTXThue1 = random(0,100);
-randomTXThue2 = random(0,100);
-randomTXThue3 = random(0,100);
-randomTXThue4 = random(0,100);
-randomTXThue5 = random(0,100);
-randomTXThue6 = random(0,100);
-randomTXThue7 = random(0,100);
-randomTXThue8 = random(0,100);
-stroke(25);
-//strokeWeight(3);
-textSize(window.innerHeight/10);
-	
-//from original
-fontSIZE = window.innerHeight/10;
-//randomBGhue = random(0,100);
-randomTXThue = random(0,100);
-randomPerson = Math.floor(Math.random()*peopleArray.length); //random person
-randomFocus = Math.floor(Math.random()*focusArray.length);//random focus
-createCanvas(windowWidth, windowHeight);
-colorMode(HSL,100);
-//selectedSound1.play();
-//selectedSound2.play();
-//selectedSound3.play();
+		createCanvas(windowWidth, windowHeight); //create canvas
+		colorMode(HSL,100);	//change colour mode to Hue, Saturation, and Lightness with max values of 100
 
+		randomTXThue1 = random(0,100); 	//defining static random colours for loading page text
+		randomTXThue2 = random(0,100);	//each line is a different colour
+		randomTXThue3 = random(0,100);
+		randomTXThue4 = random(0,100);
+		randomTXThue5 = random(0,100);
+		randomBUTTONhue = random(0,100);
+		randomTXThue7 = random(0,100);
+		randomTXThue8 = random(0,100);
 
+		textAlign(CENTER, CENTER);			//text alignment
+		randomBGhue = random(0,100); //random background colour for initial game state
+		randomTXThue = random(0,100); ////random text colour for iniital game state
 
+		randomPerson = Math.floor(Math.random()*peopleArray.length); //random person for initial game state
+		randomFocus = Math.floor(Math.random()*focusArray.length);//random focus for initial game state
 
-	
-	videoIN = createCapture({				//initialize video capture
-    audio: false,
-    video: {
-			//facingMode: {exact: "environment"},
-			maxFrameRate: 10
+		videoIN = createCapture({				//initialize video capture as videoIN
+    		audio: false,						//no audio
+    		video: {							//video constraints
+			//facingMode: {exact: "environment"}, //selecting camera in mobile
+			maxFrameRate: 10					//lowered frame rate
     		}
   			}
 			);
-			videoIN.hide();
-	
-	//background(random(0,255),100,100);											//background - remove once random is set up
-
-	textAlign(CENTER, CENTER);			//text alignment
-	textSize(fontSIZE);		//text size
-	
-
-	//text(peopleArray[randomPerson],window.innerWidth/2,window.innerHeight/6);		//display text randomPerson
-	//text(focusArray[randomFocus],window.innerWidth/2,window.innerHeight/6*5);		//display randomFocus
-	
-
-}
-
+		videoIN.hide();						//hide videoIN, to be implemented in draw.
+}	// end of setup
+		
 function draw(){
- 	
-var difference = Math.abs(randomBGhue - randomTXThue);
-	//print(difference);
-	
-	if (difference < 20 || difference > 80) {randomTXThue = random(0,100);}
-	if (openbutton == 0)  //loading page
+	textCALCsize = window.innerWidth*window.innerHeight/7000;	// proportional textSize
+	strokeCALC = window.innerWidth*window.innerHeight/160000;   // proportional strokeWidth
+	difference = Math.abs(randomTXThue1 - randomTXThue2);
+	//calculates absolute difference between background and text colours
+		if (difference < 19 || difference > 81) {randomTXThue2 = random(0,100);}
+		//enforces difference in background and text colours
+	difference = Math.abs(randomTXThue2 - randomTXThue3); //repeat for all colours in loading page
+		if (difference < 19 || difference > 81) {randomTXThue3 = random(0,100);}
+	difference = Math.abs(randomTXThue3 - randomTXThue4);
+		if (difference < 19 || difference > 81) {randomTXThue4 = random(0,100);}
+	difference = Math.abs(randomTXThue4 - randomTXThue5);
+		if (difference < 19 || difference > 81) {randomTXThue5 = random(0,100);}
+	difference = Math.abs(randomTXThue5 - randomBUTTONhue);
+		if (difference < 19 || difference > 81) {randomBUTTONhue = random(0,100);}
+
+
+	if (openbutton == 0)  //loading page state
 		{
 			background(15);
 			noStroke();
-			var difference1 = Math.abs(randomTXThue1 - randomTXThue2);
-			//print(difference2);
-			if (difference1 < 19 || difference2 > 81) {randomTXThue2 = random(0,100);}
+			textSize(textCALCsize);
 			fill(randomTXThue1, sat, light);
 			text('Frame It Up!',window.innerWidth/2,window.innerHeight/8);
-			textSize(window.innerHeight/20);
-			var difference2 = Math.abs(randomTXThue2 - randomTXThue3);
-			//print(difference2);
-			if (difference2 < 19 || difference2 > 81) {randomTXThue3 = random(0,100);}
+			textSize(textCALCsize/2);
 			fill(randomTXThue2, sat, light);		
-			text('Here is how you play',window.innerWidth/2,window.innerHeight/6*1.7);
-			var difference3 = Math.abs(randomTXThue3 - randomTXThue4);
-			//print(difference2);
-			if (difference3 < 19 || difference3 > 81) {randomTXThue4 = random(0,100);}
+			text('Use your camera to find the person',window.innerWidth/2,window.innerHeight/10*3);	
 			fill(randomTXThue3, sat, light);		
-			text('Every minute your screen will generate a name and a gestural prompt',window.innerWidth/2,window.innerHeight/6*2.2);
-			var difference4 = Math.abs(randomTXThue4 - randomTXThue5);
-			//print(difference2);
-			if (difference4 < 19 || difference4 > 81) {randomTXThue5 = random(0,100);}
+			text('Ask them to perform the gestural prompt',window.innerWidth/2,window.innerHeight/10*4);
 			fill(randomTXThue4, sat, light);		
-			text('Use your camera to find the person',window.innerWidth/2,window.innerHeight/6*2.7);	
-			var difference5 = Math.abs(randomTXThue5 - randomTXThue6);
-			//print(difference2);
-			if (difference5 < 19 || difference5 > 81) {randomTXThue6 = random(0,100);}
-			fill(randomTXThue5, sat, light);		
-			text('Ask them to perform the gestural prompt',window.innerWidth/2,window.innerHeight/6*3.2);
-			var difference6 = Math.abs(randomTXThue6 - randomTXThue7);
-			//print(difference2);
-			if (difference6 < 19 || difference6 > 81) {randomTXThue7 = random(0,100);}
-			fill(randomTXThue6, sat, light);		
-			text('Click to take a picture',window.innerWidth/2,window.innerHeight/6*3.7);
+			text('Click to take a picture',window.innerWidth/2,window.innerHeight/10*5);
 			stroke(25);
-			strokeWeight(3);
-			fill(randomTXThue7, sat, light);
-  			rect(windowWidth/8*3, windowHeight/12*8, windowWidth/4, windowHeight/4,50); 		//button to go to the camera 
-			var difference7 = Math.abs(randomTXThue8 - randomTXThue7);
-			//print(difference2);
-			if (difference7 < 19 || difference7 > 81) {randomTXThue8 = random(0,100);}
-  			fill(randomTXThue8, sat, light);
-  			textSize(window.innerHeight/10);
-			text('PLAY', windowWidth/2, windowHeight/12*9.5);
+			strokeWeight(strokeCALC);
+			fill(randomBUTTONhue, sat, light);
+  			rect(windowWidth/2-textCALCsize*5/3, windowHeight/12*9-textCALCsize*3/4, textCALCsize*10/3, textCALCsize*6/4, textCALCsize/2, textCALCsize/2, textCALCsize/2, textCALCsize/2); 		//rectangular button to enter game state - proportional to textCALCsize :)
+  			fill(randomTXThue5, sat, light);
+  			textSize(textCALCsize);
+			text('PLAY', windowWidth/2, windowHeight/12*9);
 	
-  if(mouseX>windowWidth/8*3 && mouseX<windowWidth/8*5 && mouseY>windowHeight/12*8 && mouseY<windowHeight/12*11 && mouseIsPressed) 
+  if(mouseX>windowWidth/2-textCALCsize*5/3 && mouseX<windowWidth/2+textCALCsize*5/3 && mouseY>windowHeight/12*9.5-textCALCsize*3/4 && mouseY<windowHeight/12*9.5+textCALCsize*3/4 && mouseIsPressed) 	//if button is clicked - constrained to position of button - proportional to textCALCsize ;)
   		{
-		openbutton=1;
-			r = random([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+		openbutton=1;			//switch from loading state 0 to game state 1
+			r = random([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);		//select a random number
+			if (r == 0) {selectedSound0.play();}			//play the corresponding randomly loaded sound
+			if (r == 1) {selectedSound1.play();}
+			if (r == 2) {selectedSound2.play();}
+			if (r == 3) {selectedSound3.play();}
+			if (r == 4) {selectedSound4.play();}
+			if (r == 5) {selectedSound5.play();}
+			if (r == 6) {selectedSound6.play();}
+			if (r == 7) {selectedSound7.play();}
+			if (r == 8) {selectedSound8.play();}
+			if (r == 9) {selectedSound9.play();}
+			r = random([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);		//2nd layered sound on button click
 			if (r == 0) {selectedSound0.play();}
 			if (r == 1) {selectedSound1.play();}
 			if (r == 2) {selectedSound2.play();}
@@ -320,7 +283,7 @@ var difference = Math.abs(randomBGhue - randomTXThue);
 			if (r == 7) {selectedSound7.play();}
 			if (r == 8) {selectedSound8.play();}
 			if (r == 9) {selectedSound9.play();}
-			r = random([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+			r = random([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);		//third layered sound on button click
 			if (r == 0) {selectedSound0.play();}
 			if (r == 1) {selectedSound1.play();}
 			if (r == 2) {selectedSound2.play();}
@@ -331,54 +294,28 @@ var difference = Math.abs(randomBGhue - randomTXThue);
 			if (r == 7) {selectedSound7.play();}
 			if (r == 8) {selectedSound8.play();}
 			if (r == 9) {selectedSound9.play();}
-			r = random([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-			if (r == 0) {selectedSound0.play();}
-			if (r == 1) {selectedSound1.play();}
-			if (r == 2) {selectedSound2.play();}
-			if (r == 3) {selectedSound3.play();}
-			if (r == 4) {selectedSound4.play();}
-			if (r == 5) {selectedSound5.play();}
-			if (r == 6) {selectedSound6.play();}
-			if (r == 7) {selectedSound7.play();}
-			if (r == 8) {selectedSound8.play();}
-			if (r == 9) {selectedSound9.play();}
-		} 			//setting the parameters for the button
-  
-  //print(openbutton);
-  	
-		}
+		} 			//end of button statement
+		}			//end of loading page state
+	
 	if (openbutton == 1) //game state	
-	{
-		date = new Date();
-		seconds = date.getSeconds();
-		fontSIZE = window.innerHeight/10;
-		background(randomBGhue, sat, light);
-		//background(randomBGhue+rotationX/2, sat, light);
-		fill(randomTXThue, sat, light);
-		textSize(fontSIZE);
+		{
+		var difference = Math.abs(randomBGhue - randomTXThue); //calculates absolute difference between background and text colours
+		if (difference < 20 || difference > 80) {randomTXThue = random(0,100);} //enforces difference in background and text colours in game state
+		
+		date = new Date();		//calculate Date
+		seconds = date.getSeconds();	//seconds of date
+		background(randomBGhue, sat, light);	//background using random colour and global saturation and lightness
+		fill(randomTXThue, sat, light); //fill using random colour and global saturation and lightness
+		textSize(textCALCsize);	//text size
 		stroke(25);
-		strokeWeight(3);
+		strokeWeight(strokeCALC);	//stroke weight
 		text(peopleArray[randomPerson],window.innerWidth/2,window.innerHeight/6);		//display text randomPerson
 		text(focusArray[randomFocus],window.innerWidth/2,window.innerHeight/6*5); 		//display randomFocus
 
-
-	
-	//background(177);											//background - remove once random is set up
-
-	//textAlign(CENTER, CENTER);			//text alignment
-	//textSize(fontSIZE);		//text size
-	//strokeWeight(window.innerWidth/120);
-
-	//text(peopleArray[randomPerson],window.innerWidth/2,window.innerHeight/6);		//display text randomPerson
-	//text(focusArray[randomFocus],window.innerWidth/2,window.innerHeight/6*5);		//display randomFocus
-	
-	//background to start
-
-
-	
 	//start video section
 	
-	if (videoIN.width >= window.innerWidth && window.innerWidth>=window.innerHeight)
+	if (videoIN.width >= window.innerWidth && window.innerWidth >= window.innerHeight)
+		//four video display possibilities depending on source video and canvas size.
 		{
 			image(videoIN,
 				  	videoIN.width/2 - window.innerWidth/2,      	//source x
@@ -390,12 +327,11 @@ var difference = Math.abs(randomBGhue - randomTXThue);
 				  	window.innerWidth,								//source width
 				  	window.innerHeight/3);							//source height
 
-					//print("video wider than horizontoal window");
+					//print("video wider than horizontal window");
 			
-			//video wider than horizontoal window
 		} 
 	
-		if (videoIN.width >= window.innerWidth && window.innerWidth>=window.innerHeight)
+		if (videoIN.width >= window.innerWidth && window.innerWidth < window.innerHeight)
 		{
 			image(videoIN,
 				  	videoIN.width/2 - window.innerWidth/2,      	//source x
@@ -408,21 +344,17 @@ var difference = Math.abs(randomBGhue - randomTXThue);
 				  	window.innerHeight/3);
 			
 					//print("video wider than vertical window");
-			//source height
-			//video wider than vertical window
 		} 
 	
-	if (videoIN.width <= window.innerWidth && window.innerWidth>=window.innerHeight)
+	if (videoIN.width < window.innerWidth && window.innerWidth >= window.innerHeight)
 		{	
 			image(videoIN, 0, window.innerHeight/3, videoIN.width, window.innerHeight/3, window.innerWidth/2-videoIN.width/2, window.innerHeight/3, videoIN.width, window.innerHeight/3);
 			
-			//print("video narrower than horizontal window")
-		} //video narrower than horizontal window
+			//print("video narrower than horizontal window");
+		} 
 	
-	if (videoIN.width <= window.innerWidth && window.innerWidth<window.innerHeight) //phone height
+	if (videoIN.width < window.innerWidth && window.innerWidth < window.innerHeight)
 		{	
-					//ellipse(1,1,199,199);
-					//image(videoIN, 0, 0, 100, 100);
 					image(videoIN,
 				  	videoIN.width/4,  								//source y
 					videoIN.height*5/12,							//source y
@@ -430,19 +362,18 @@ var difference = Math.abs(randomBGhue - randomTXThue);
 				  	window.innerHeight/6,							//source height
 				  	0,												//destination x
 				  	window.innerHeight/3,							//destination y
-				  	window.innerWidth/2*2,								//destination width
-				  	window.innerHeight/6*2);							//destination height
-			//print("video narrower than vertical window")
-			//video narrower than vertical window
+				  	window.innerWidth,								//destination width
+				  	window.innerHeight/6*2);						//destination height
+			//print("video narrower than vertical window");
 		}
 // end video section
 		
-	if (seconds == 0)	//one-minute timer
+	if (seconds == 0)	//one-minute timer to switch random name and prompt. Note: depending on machine, a different number of frames happen within the 0 second window.
 		{randomPerson = Math.floor(Math.random()*peopleArray.length); //random person
 		 randomFocus = Math.floor(Math.random()*focusArray.length);//random focus}
-		 randomBGhue = random(0,100);
-		 randomTXThue = random(0,100);
-			r = random([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+		 randomBGhue = random(0,100);		//new background colour
+		 randomTXThue = random(0,100);		//new text colour
+			r = random([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);	//play a random sound
 			if (r == 0) {selectedSound0.play();}
 			if (r == 1) {selectedSound1.play();}
 			if (r == 2) {selectedSound2.play();}
@@ -454,18 +385,15 @@ var difference = Math.abs(randomBGhue - randomTXThue);
 			if (r == 8) {selectedSound8.play();}
 			if (r == 9) {selectedSound9.play();}
 
-		 //mySound.play();
-
 		}
 	}
 }
 
-function mousePressed() {
+function mousePressed() {	//save canvas to named PNG file. Fileame is 'name' and 'focus'.
   	if (openbutton == 1){
 	saveCanvas("Frame it UP - " + peopleArray[randomPerson]+"'s " + focusArray[randomFocus], "png");
 	r = random([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-	//print(r);
-	randomFocus = Math.floor(Math.random()*focusArray.length);
+	randomFocus = Math.floor(Math.random()*focusArray.length); //sound plays for click
 	
 	if (r == 0) {selectedSound0.play();}
 	if (r == 1) {selectedSound1.play();}
@@ -478,7 +406,6 @@ function mousePressed() {
 	if (r == 8) {selectedSound8.play();}
 	if (r == 9) {selectedSound9.play();}}
 	
-	//saveFrames("out", "png", 1, 1);
 }
 
 
