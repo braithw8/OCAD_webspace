@@ -323,53 +323,55 @@ function draw(){
 		//four video display possibilities depending on source video and canvas size.
 		{
 			image(videoIN,
-				  	videoIN.width/2 - window.innerWidth/2,      	//source x
-					videoIN.height/2 - window.innerHeight/6,		//source y
-				  	window.innerWidth,								//destination width
-				  	window.innerHeight/3,							//destination height
+
 				  	0,												//destination x
 				  	window.innerHeight/3,							//destination y
+				  	window.innerWidth,								//destination width
+				  	window.innerHeight/3,							//destination height
+				  	videoIN.width/2 - window.innerWidth/2,      	//source x
+					videoIN.height/2 - window.innerHeight/6,		//source y
 				  	window.innerWidth,								//source width
 				  	window.innerHeight/3);							//source height
 
-					//print("video wider than horizontal window");
+					print("video wider than horizontal window");
 			
 		} 
 	
 		if (videoIN.width >= window.innerWidth && window.innerWidth < window.innerHeight)
 		{
 			image(videoIN,
-				  	videoIN.width/2 - window.innerWidth/2,      	//source x
-					videoIN.height/2 - window.innerHeight/6,		//source y
-				  	window.innerWidth,								//destination width
-				  	window.innerHeight/3,							//destination height
 				  	0,												//destination x
 				  	window.innerHeight/3,							//destination y
 				  	window.innerWidth,								//source width
-				  	window.innerHeight/3);
+				  	window.innerHeight/3,
+				  	videoIN.width/2 - window.innerWidth/2,      	//source x
+					videoIN.height/2 - window.innerHeight/6,		//source y
+				  	window.innerWidth,								//destination width
+				  	window.innerHeight/3);							//destination height
 			
-					//print("video wider than vertical window");
+					print("video wider than vertical window");
 		} 
 	
 	if (videoIN.width < window.innerWidth && window.innerWidth >= window.innerHeight)
 		{	
-			image(videoIN, 0, window.innerHeight/3, videoIN.width, window.innerHeight/3, window.innerWidth/2-videoIN.width/2, window.innerHeight/3, videoIN.width, window.innerHeight/3);
+			image(videoIN,window.innerWidth/2-videoIN.width/2, window.innerHeight/3, videoIN.width, window.innerHeight/3, 0, window.innerHeight/3, videoIN.width, window.innerHeight/3);
 			
-			//print("video narrower than horizontal window");
+			
+			print("video narrower than horizontal window");
 		} 
 	
 	if (videoIN.width < window.innerWidth && window.innerWidth < window.innerHeight)
 		{	
 					image(videoIN,
-				  	videoIN.width/4,  								//source y
-					videoIN.height*5/12,							//source y
-				  	window.innerWidth/2,							//source width
-				  	window.innerHeight/6,							//source height
 				  	0,												//destination x
 				  	window.innerHeight/3,							//destination y
 				  	window.innerWidth,								//destination width
-				  	window.innerHeight/6*2);						//destination height
-			//print("video narrower than vertical window");
+				  	window.innerHeight/6*2,							//destination height
+					videoIN.width/4,  								//source y
+					videoIN.height*5/12,							//source y
+				  	window.innerWidth/2,							//source width
+				  	window.innerHeight/6);							//source height
+			print("video narrower than vertical window");
 		}
 // end video section
 		
