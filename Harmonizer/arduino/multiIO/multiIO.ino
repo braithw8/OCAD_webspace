@@ -1,4 +1,5 @@
 //Creation&Computation
+//Modified by Finlay Braithwaite. Receiving Data from P5 capacity removed. Sending Data to P5 capacity increased to accomodate 8 potentiometers.
 //reads a sensor and sends the value out the Serial port
 //Uses a basic sending function to allow for multiple values to be sent
 
@@ -8,7 +9,7 @@
 long lastSend;                                               //used for the timer controlling the send rate
 int sendDelay = 20;                                         //ms between data sends. required for proper functionality
 
-int sensorVals[8];                                          //array used to hold the sensor values
+int sensorVals[8];                                          //array used to hold the sensor values. Modified to accomodate 8 potentiometers.
 
 
 void setup() {
